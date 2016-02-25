@@ -8,6 +8,7 @@ public class Semester {
 	private int totalCredits;
 	
 	public Semester() {
+		courses = new ArrayList<Course>();
 		totalCredits = 0;
 	}
 	
