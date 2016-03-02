@@ -1,17 +1,15 @@
 package gui;
 
-import java.util.List;
 
 import org.parse4j.Parse;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
-import org.parse4j.callback.FindCallback;
 
 import utilities.Major;
 
 public class MainPage {
-	private static ParseObject majorParse;
+//	private static ParseObject majorParse;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

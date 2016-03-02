@@ -2,17 +2,38 @@ package utilities;
 
 import java.util.ArrayList;
 
+import org.parse4j.ParseException;
+import org.parse4j.ParseObject;
+import org.parse4j.ParseQuery;
+
 public class Course {
 	private int credits;
 	
 	private String courseCode;
 	
-	private ArrayList<Course> preReqs;
+	private ArrayList<String> preReqs;
 	
 	public Course(String courseCode) {
-		preReqs = new ArrayList<Course>();
+		ParseQuery<ParseObject> findCourse = new ParseQuery<ParseObject>("Courses");
+		findCourse.whereContains("courseCode", courseCode);
+		try {
+			fillFromParseObject(findCourse.find().get(0));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Course(ParseObject parseCourse) {
+		fillFromParseObject(parseCourse);
+	}
+	
+	private void fillFromParseObject(ParseObject parseCourse) {
+		preReqs = new ArrayList<String>();
+		for(Object courseCode : parseCourse.getList("preReqs"))
+			preReqs.add((String) courseCode);
 		
-		//PARSE MUMBO JUMBO
+		courseCode = parseCourse.getString("courseCode");
+		credits = parseCourse.getInt("credits");
 	}
 	
 	public int getCredits() {
@@ -23,7 +44,21 @@ public class Course {
 		return courseCode;
 	}
 	
-	public ArrayList<Course> getPreReqs() {
+	public ArrayList<String> getPreReqs() {
 		return preReqs;
+	}
+	
+	public boolean equals(Object other) {
+		if(other == null)
+			return false;
+		
+		if(!this.getClass().equals(other.getClass()))
+				return false;
+		
+		Course o = (Course) other;
+		
+		return (courseCode.equals(o.courseCode) 
+				&& credits == o.credits 
+				&& preReqs.equals(o.preReqs));
 	}
 }
