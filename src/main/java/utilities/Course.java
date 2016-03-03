@@ -7,11 +7,15 @@ import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 
 public class Course {
-	private int credits;
+	protected int credits;
+	protected String courseCode;
+	protected ArrayList<String> preReqs;
 	
-	private String courseCode;
-	
-	private ArrayList<String> preReqs;
+	public Course() {
+		credits = 3;
+		courseCode = "";
+		preReqs = new ArrayList<String>();
+	}
 	
 	public Course(String courseCode) {
 		ParseQuery<ParseObject> findCourse = new ParseQuery<ParseObject>("Courses");
@@ -19,6 +23,10 @@ public class Course {
 		try {
 			fillFromParseObject(findCourse.find().get(0));
 		} catch (ParseException e) {
+			System.out.println(courseCode);
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println(courseCode);
 			e.printStackTrace();
 		}
 	}
@@ -60,5 +68,9 @@ public class Course {
 		return (courseCode.equals(o.courseCode) 
 				&& credits == o.credits 
 				&& preReqs.equals(o.preReqs));
+	}
+	
+	public String toString() {
+		return courseCode;
 	}
 }

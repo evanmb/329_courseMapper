@@ -24,4 +24,16 @@ public class Semester {
 	public int getCredits() {
 		return totalCredits;
 	}
+	
+	public String toString() {
+		if (courses.size() == 0)
+			return "Empty Semester";
+		
+		String retVal = courses.get(0).getCourseCode();
+		for (int i=1; i<courses.size(); i++) {
+			retVal += ", " + courses.get(i).getCourseCode();
+		}
+		
+		return retVal;
+	}
 }
