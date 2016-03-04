@@ -91,7 +91,7 @@ public class Major {
 				boolean needsPreReq = false;
 				for (String preReq : course.getPreReqs()) {
 					// Split in case requisite can be filled by multiple courses
-					String[] splitReqs = preReq.split("|");
+					String[] splitReqs = preReq.split("\\|");
 					
 					// Check if at least one is completed
 					boolean isMet = false;

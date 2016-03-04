@@ -20,10 +20,6 @@ public class Course {
 	public Course(String courseCode) {
 		ParseQuery<ParseObject> findCourse = new ParseQuery<ParseObject>("Courses");
 		
-		if (courseCode.contains("|")) {
-			courseCode = courseCode.split("|")[0];
-		}
-		
 		findCourse.whereContains("courseCode", courseCode);
 		
 		try {
@@ -47,7 +43,15 @@ public class Course {
 		preReqs = new ArrayList<String>();
 		
 		for (Object courseCode : parseCourse.getList("preReqs")) {
-			preReqs.add((String) courseCode);
+				if (((String)courseCode).contains("\\|")) {
+					for (String curCourse : ((String)courseCode).split("\\|")) {
+						System.out.println((String) curCourse);
+						preReqs.add((String) curCourse);
+					}
+				}
+				else {
+					preReqs.add((String) courseCode);
+				}
 		}
 		
 		courseCode = parseCourse.getString("courseCode");
