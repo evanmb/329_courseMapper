@@ -12,8 +12,12 @@ import javax.swing.JTextPane;
 import utilities.Course;
 import utilities.Semester;
 
+/**
+ * 
+ * @author Kit Kohl
+ *
+ */
 public class SemesterMaker {
-
 		private JPanel panel;
 		private GridBagConstraints gridCon;
 		private Semester semester;
@@ -24,9 +28,7 @@ public class SemesterMaker {
 			this.semester = courses;
 			semesterNum = numberOfSemester;
 			makeSemester();
-			
 		}
-		
 		
 		private void makeSemester()
 		{
@@ -54,9 +56,10 @@ public class SemesterMaker {
 			txtpnTest.setText(course.getCourseCode());
 			txtpnTest.setEditable(false);
 			//contentPane.add(txtpnTest);
-			if(semesterNum%2 == 0){
+			if (semesterNum%2 == 0) {
 				txtpnTest.setBackground(Color.WHITE);
-			}else
+			}
+			else
 			{
 				txtpnTest.setBackground(Color.YELLOW);
 			}
@@ -66,13 +69,13 @@ public class SemesterMaker {
 		private JTextPane lastPanel(int credits)
 		{
 			JTextPane txtpnTest = new JTextPane();
-			txtpnTest.setText("credits " + credits + "\nSemester " + (semesterNum+1));
+			txtpnTest.setText("Credits " + credits + "\nSemester " + (semesterNum+1));
 			txtpnTest.setEditable(false);
 			if(semesterNum%2 == 0){
-				txtpnTest.setBackground(Color.WHITE);
+				txtpnTest.setBackground(Color.LIGHT_GRAY);
 			}else
 			{
-				txtpnTest.setBackground(Color.YELLOW);
+				txtpnTest.setBackground(Color.LIGHT_GRAY);
 			}
 			return txtpnTest;
 		}

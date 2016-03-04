@@ -7,6 +7,11 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 
+/**
+ * 
+ * @author Evan Blackwell
+ *
+ */
 public class Major {
 	private ArrayList<Course> coreClasses;
 	private String name;

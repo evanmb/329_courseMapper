@@ -2,6 +2,11 @@ package utilities;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Christian Klein
+ *
+ */
 public class Semester {
 	private ArrayList<Course> courses;
 	

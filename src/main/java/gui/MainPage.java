@@ -11,6 +11,11 @@ import org.parse4j.ParseQuery;
 import utilities.Major;
 import utilities.Semester;
 
+/**
+ * 
+ * @author Evan Blackwell
+ *
+ */
 public class MainPage {
 //	private static ParseObject majorParse;
 	

@@ -6,6 +6,13 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 
+
+/**
+ * 
+ * @author Evan Blackwell
+ * @reviser Christian Klein
+ *
+ */
 public class Course {
 	protected int credits;
 	protected String courseCode;

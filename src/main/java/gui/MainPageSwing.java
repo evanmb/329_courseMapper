@@ -43,12 +43,20 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 
-public class MainPageSwing extends JFrame {
 
+/**
+ * 
+ * @author Kit Kohl
+ * @reviser Christian Klein
+ *
+ */
+public class MainPageSwing extends JFrame {
 	private JPanel contentPane;
+	private static MainPageSwing frame;
+	
 	private ArrayList<Semester> schedule = new ArrayList<Semester>();
 	private ArrayList<String> electives = new ArrayList<String>();
-	private static MainPageSwing frame;
+
 	private String[] options = {"12","13","14","15","16","17","18"};
 	
 	//String Array for testing
@@ -91,6 +99,11 @@ public class MainPageSwing extends JFrame {
 		String minCredits = (String) JOptionPane.showInputDialog(null, "Minimum credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
 		String maxCredits = (String) JOptionPane.showInputDialog(null, "Maximum credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
 		
+		JOptionPane.showMessageDialog(null, "Generating schedule...\nThis may take a few seconds.\nPress OK to proceed.", "Course Mapper", JOptionPane.PLAIN_MESSAGE, null);
+		
+		if (chosen == null) {
+			chosen = "Computer Engineering";
+		}
 		
 		ParseQuery<ParseObject> majorParse = new ParseQuery<ParseObject>("Majors");
 		majorParse.whereContains("name", chosen);
@@ -101,6 +114,14 @@ public class MainPageSwing extends JFrame {
 		}
 		catch (ParseException e) {
 			e.printStackTrace();
+		}
+		
+		if (minCredits == null) {
+			minCredits = "12";
+		}
+		
+		if (maxCredits == null) {
+			maxCredits = "18";
 		}
 		
 		schedule = major.makeSchedule(Integer.parseInt(minCredits), Integer.parseInt(maxCredits));
@@ -159,7 +180,6 @@ public class MainPageSwing extends JFrame {
 			public void mouseReleased(MouseEvent e) {
 				runCourseMapper();
 				//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-				
 			}
 		});
 		
