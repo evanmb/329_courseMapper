@@ -22,10 +22,12 @@ public class Course {
 		findCourse.whereContains("courseCode", courseCode);
 		try {
 			fillFromParseObject(findCourse.find().get(0));
-		} catch (ParseException e) {
+		}
+		catch (ParseException e) {
 			System.out.println(courseCode);
 			e.printStackTrace();
-		} catch (NullPointerException e) {
+		}
+		catch (NullPointerException e) {
 			System.out.println(courseCode);
 			e.printStackTrace();
 		}

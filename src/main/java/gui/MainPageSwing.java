@@ -52,15 +52,16 @@ public class MainPageSwing extends JFrame {
 	private String[] options = {"12","13","14","15","16","17","18"};
 	
 	//String Array for testing
-	private String[] majors = {"Computer Engineering", "Software Engineering", "Computer Science", "Music"}; 
+	private String[] majors = {"Computer Engineering", "Software Engineering", "Computer Science", "Music"};
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		Parse.initialize("ueGmIfXGhjfg5T31XCDEc0fkT5uEVZVBfIDGLxBp", 
+				"XXZyCO5GmBUAAm9mirRaxfW91WqmxWf3cn4HN3iu");
 		runCourseMapper();
 	}
-	
-	
 	
 	public static void runCourseMapper()
 	{
@@ -81,59 +82,54 @@ public class MainPageSwing extends JFrame {
 	 * Create the frame.
 	 */
 	public MainPageSwing() {
-	
-	//for Testing, should be replaced with one from database
-	for(int i = 0; i < 10; i++){
-		electives.add("Elective " + i +"\n"); 
-	}
-	
-	String chosen = (String) JOptionPane.showInputDialog(null, "Major:", "Pick a Major", JOptionPane.PLAIN_MESSAGE, null, majors, "Computer Engineering"); //String Array "majors should be replaced with one from the database
-	String credits = (String) JOptionPane.showInputDialog(null, "Credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
-	
-	ParseQuery<ParseObject> majorParse = new ParseQuery<ParseObject>("Majors");
-	majorParse.whereContains("name", chosen);
-	
-	Major major = null;
-	try {
-		major = new Major(majorParse.find().get(0));
-	} catch (ParseException e) {
-		e.printStackTrace();
-	}
-	
-	
-	int creditsPerSemester = 15;//default to 15
-	if(credits.equals("12")){
-		creditsPerSemester = 12;
-	}
-	if(credits.equals("13")){
-		creditsPerSemester = 13;
-	}
-	if(credits.equals("14")){
-		creditsPerSemester = 14;
-	}
-	if(credits.equals("15")){
-		creditsPerSemester = 15;
-	}
-	if(credits.equals("16")){
-		creditsPerSemester = 16;
-	}
-	if(credits.equals("17")){
-		creditsPerSemester = 17;
-	}
-	if(credits.equals("18")){
-		creditsPerSemester = 18;
-	}
-	
-	
-	schedule = major.makeSchedule(creditsPerSemester,18);
-	
-	schedulePart(schedule);
-	
-	System.out.println(chosen);
-	System.out.println(credits);
-	
-	
-	
+		//for Testing, should be replaced with one from database
+		for (int i = 0; i < 10; i++) {
+			electives.add("Elective " + i +"\n"); 
+		}
+		
+		String chosen = (String) JOptionPane.showInputDialog(null, "Major:", "Pick a Major", JOptionPane.PLAIN_MESSAGE, null, majors, "Computer Engineering"); //String Array "majors should be replaced with one from the database
+		String credits = (String) JOptionPane.showInputDialog(null, "Credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
+		
+		ParseQuery<ParseObject> majorParse = new ParseQuery<ParseObject>("Majors");
+		majorParse.whereContains("name", chosen);
+		
+		Major major = null;
+		try {
+			major = new Major(majorParse.find().get(0));
+		}
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		int creditsPerSemester = 15;//default to 15
+		if (credits.equals("12")) {
+			creditsPerSemester = 12;
+		}
+		if (credits.equals("13")) {
+			creditsPerSemester = 13;
+		}
+		if (credits.equals("14")) {
+			creditsPerSemester = 14;
+		}
+		if (credits.equals("15")) {
+			creditsPerSemester = 15;
+		}
+		if (credits.equals("16")) {
+			creditsPerSemester = 16;
+		}
+		if (credits.equals("17")) {
+			creditsPerSemester = 17;
+		}
+		if (credits.equals("18")) {
+			creditsPerSemester = 18;
+		}
+		
+		schedule = major.makeSchedule(creditsPerSemester,18);
+		
+		schedulePart(schedule);
+		
+		System.out.println(chosen);
+		System.out.println(credits);
 	}
 	
 	public void schedulePart(ArrayList schedule)
@@ -156,8 +152,8 @@ public class MainPageSwing extends JFrame {
 			
 			contentPane.add(newSemester.getPanel(), newSemester.getGridCon());
 		}
-		lastPanel();
 		
+		//lastPanel();	
 	}
 	
 	/*
@@ -198,6 +194,7 @@ public class MainPageSwing extends JFrame {
 		GridBagConstraints gbc_btnElectives = new GridBagConstraints();
 		gbc_btnElectives.gridx = 13;
 		gbc_btnElectives.gridy = 0;
+		
 		btnElectives.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -205,11 +202,9 @@ public class MainPageSwing extends JFrame {
 				JOptionPane.showMessageDialog(contentPane, electives, "Top 10", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
+		
 		panel_12.add(btnElectives, gbc_btnElectives);
 		
 		return panel_12;
 	}
-	
-	
-
 }
