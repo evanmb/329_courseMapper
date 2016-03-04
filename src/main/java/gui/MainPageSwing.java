@@ -128,8 +128,8 @@ public class MainPageSwing extends JFrame {
 		
 		schedulePart(schedule);
 		
-		System.out.println(chosen);
-		System.out.println(credits);
+		//System.out.println(chosen);
+		//System.out.println(credits);
 	}
 	
 	public void schedulePart(ArrayList schedule)

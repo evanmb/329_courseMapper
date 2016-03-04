@@ -19,7 +19,13 @@ public class Course {
 	
 	public Course(String courseCode) {
 		ParseQuery<ParseObject> findCourse = new ParseQuery<ParseObject>("Courses");
+		
+		if (courseCode.contains("|")) {
+			courseCode = courseCode.split("|")[0];
+		}
+		
 		findCourse.whereContains("courseCode", courseCode);
+		
 		try {
 			fillFromParseObject(findCourse.find().get(0));
 		}
@@ -39,8 +45,10 @@ public class Course {
 	
 	private void fillFromParseObject(ParseObject parseCourse) {
 		preReqs = new ArrayList<String>();
-		for(Object courseCode : parseCourse.getList("preReqs"))
+		
+		for (Object courseCode : parseCourse.getList("preReqs")) {
 			preReqs.add((String) courseCode);
+		}
 		
 		courseCode = parseCourse.getString("courseCode");
 		credits = parseCourse.getInt("credits");
@@ -59,11 +67,9 @@ public class Course {
 	}
 	
 	public boolean equals(Object other) {
-		if(other == null)
-			return false;
+		if (other == null) return false;
 		
-		if(!this.getClass().equals(other.getClass()))
-				return false;
+		if (!this.getClass().equals(other.getClass())) return false;
 		
 		Course o = (Course) other;
 		
