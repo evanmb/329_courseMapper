@@ -78,7 +78,12 @@ public class Major {
 			//System.out.println("Round " + count);
 			//System.out.println("To be scheduled: " + toBeScheduled);
 			
-			if (count > 15) return schedule;
+			if (count > 15) {
+				for (Course c : toBeScheduled) {
+					System.out.println(c.getCourseCode());
+				}
+				return schedule;
+			}
 			
 			Semester currentSemester = new Semester();
 			

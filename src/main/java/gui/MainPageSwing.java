@@ -88,7 +88,9 @@ public class MainPageSwing extends JFrame {
 		}
 		
 		String chosen = (String) JOptionPane.showInputDialog(null, "Major:", "Pick a Major", JOptionPane.PLAIN_MESSAGE, null, majors, "Computer Engineering"); //String Array "majors should be replaced with one from the database
-		String credits = (String) JOptionPane.showInputDialog(null, "Credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
+		String minCredits = (String) JOptionPane.showInputDialog(null, "Minimum credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
+		String maxCredits = (String) JOptionPane.showInputDialog(null, "Maximum credits per semester:", "Credits per semester", JOptionPane.PLAIN_MESSAGE, null, options, "Computer Engineering");
+		
 		
 		ParseQuery<ParseObject> majorParse = new ParseQuery<ParseObject>("Majors");
 		majorParse.whereContains("name", chosen);
@@ -101,30 +103,7 @@ public class MainPageSwing extends JFrame {
 			e.printStackTrace();
 		}
 		
-		int creditsPerSemester = 15;//default to 15
-		if (credits.equals("12")) {
-			creditsPerSemester = 12;
-		}
-		if (credits.equals("13")) {
-			creditsPerSemester = 13;
-		}
-		if (credits.equals("14")) {
-			creditsPerSemester = 14;
-		}
-		if (credits.equals("15")) {
-			creditsPerSemester = 15;
-		}
-		if (credits.equals("16")) {
-			creditsPerSemester = 16;
-		}
-		if (credits.equals("17")) {
-			creditsPerSemester = 17;
-		}
-		if (credits.equals("18")) {
-			creditsPerSemester = 18;
-		}
-		
-		schedule = major.makeSchedule(creditsPerSemester,18);
+		schedule = major.makeSchedule(Integer.parseInt(minCredits), Integer.parseInt(maxCredits));
 		
 		schedulePart(schedule);
 		
